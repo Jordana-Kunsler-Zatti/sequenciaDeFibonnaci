@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fibonnaci</title>
+    </head>
+
+    <body>
+        <input type="number" id="valorDado" placeholder="Digite um número">
+        <button type="button" onclick="zetaFibonnaci();">Executar</button>
+        <div id="print"></div>
+        <div id="zeta">
+            <p id="vazio"></p>
+            <h3 id="nz"></h3>
+            <p id="p"></p>
+            <p id="zetas"></p>
+        </div>
+    </body>
+
+    <script>
+        function zetaFibonnaci ()
+        {
+            let printarGrande = document.createElement("h2");
+            let printar = document.createElement("h5");
+            let div = document.querySelector("#print");
+            div.appendChild(printarGrande);
+            div.appendChild(printar);
+
+            let valor = document.getElementById('valorDado').value;
+            
+            if(valor == "")
+            {
+                document.getElementById("nz").textContent = document.getElementById("p").textContent = document.getElementById("zetas").textContent ="";
+                return document.getElementById("vazio").textContent = "Campo valor está vazio!";
+
+            }
+
+            else
+            {
+                document.getElementById("vazio").textContent = "";
+                document.getElementById("p").innerHTML = "Lista dos Zetas:";
+
+                let arrayZeta = [];
+                let i = 0;
+                let txt = "";
+
+                while(valor > 0)
+                {
+                    arrayZeta[i] = sequenciaFibonnaci(valor);
+                    if (arrayZeta[i] == 0) {
+                        break;
+                    } 
+                    
+                    valor -= arrayZeta[i];
+                    i++;
+                }
+
+                for (i in arrayZeta) 
+                {
+                    txt+=arrayZeta[i]+"<br>";
+                }
+
+                document.getElementById("zetas").innerHTML = txt;
+
+                return document.getElementById("nz").textContent = "O número Zeta é: " + arrayZeta.length;
+            } 
+            
+
+        }
+
+        function sequenciaFibonnaci(valor)
+        {
+            let array = [0,1];
+            let i = 1;
+            let sub = 0;
+
+            if (valor == 1 || valor == 0) 
+            {
+                sub = valor;
+            }
+
+            else 
+            {
+                while(array[i]<valor)
+                {
+                    i++;
+                    array[i] = array[i-1] + array[i-2];
+                    if (array[i]<=valor) {
+                        sub = array[i];
+                    }
+                }
+            }
+            return sub;
+        }
+
+    </script>
+
+</html>
